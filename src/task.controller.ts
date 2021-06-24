@@ -5,7 +5,8 @@ import {
   HttpStatus,
   HttpException,
 } from '@nestjs/common';
-import { TaskService, StartTaskResult } from './task.service';
+import { TaskService } from './task.service';
+import { StartTaskResult } from './task.types';
 
 /**
  * Task module controller.
