@@ -1,8 +1,12 @@
 import { Injectable } from '@nestjs/common';
 
+/**
+ * Root module service.
+ * Used by {@link AppController}.
+ */
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+  getPing(): string {
+    return 'pong';
   }
 }
