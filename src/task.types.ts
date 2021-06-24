@@ -45,3 +45,29 @@ export type StopTaskResultResponse = {
    */
   statusCode: number;
 };
+
+/**
+ * @typedef {Object} GetCurrentTaskResult
+ */
+export type GetCurrentTaskResult = {
+  /**
+   * Status flag that is true only when everything succeded.
+   * @type{boolean}
+   */
+  success: boolean;
+  name: string;
+  description: string;
+};
+
+/**
+ * @typedef {Object} GetCurrentTaskResultResponse
+ */
+export type GetCurrentTaskResultResponse = {
+  /**
+   * HTTP status code for the start task operation
+   * @type{number}
+   */
+  statusCode: number;
+  name: string;
+  description: string;
+};

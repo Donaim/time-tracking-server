@@ -3,13 +3,13 @@ import * as T from './task.types';
 
 /**
  * Task module service.
+ * Communicates with database.
  * Used by {@link TaskController}.
  */
 @Injectable()
 export class TaskService {
   /**
    * Handler for startTask request.
-   * Performs database mutations.
    * @param {string} name - The name of the task.
    * @param {string} description - Task description.
    * @returns {StartTaskResult}
@@ -22,11 +22,19 @@ export class TaskService {
 
   /**
    * Handler for stopTask request.
-   * Performs database mutations.
    * @returns {StopTaskResult}
    */
   stopTask(): T.StopTaskResult {
     // TODO: database requests
     return { success: true };
+  }
+
+  /**
+   * Handler for getCurrentTask request.
+   * @returns {GetCurrentTaskResult}
+   */
+  getCurrentTask(): T.GetCurrentTaskResult {
+    // TODO: database requests
+    return { success: true, name: 'TODO', description: 'TODO' };
   }
 }
