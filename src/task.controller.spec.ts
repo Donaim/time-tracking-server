@@ -29,12 +29,14 @@ describe('TaskController', () => {
   });
 
   describe('/stop_task', () => {
-    it('does not throw on empty query', () => {
-      expect(taskController.stopTask());
+    it('does not throw on empty query', async () => {
+      const stop = await taskController.stopTask();
+      expect(stop);
     });
 
-    it('returns statusCode:200 on empty query', () => {
-      expect(taskController.stopTask().statusCode).toBe(200);
+    it('returns statusCode:200 on empty query', async () => {
+      const stop = await taskController.stopTask();
+      expect(stop.statusCode).toBe(200);
     });
   });
 
