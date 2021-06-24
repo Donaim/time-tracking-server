@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { StartTaskResult } from './task.types';
+import * as T from './task.types';
 
 /**
  * Task module service.
@@ -14,9 +14,19 @@ export class TaskService {
    * @param {string} description - Task description.
    * @returns {StartTaskResult}
    */
-  startTask(name: string, description: string | undefined): StartTaskResult {
+  startTask(name: string, description: string | undefined): T.StartTaskResult {
     // TODO: database requests
     name = name + description;
-    return { statusCode: 200 };
+    return { success: true };
+  }
+
+  /**
+   * Handler for stopTask request.
+   * Performs database mutations.
+   * @returns {StopTaskResult}
+   */
+  stopTask(): T.StopTaskResult {
+    // TODO: database requests
+    return { success: true };
   }
 }

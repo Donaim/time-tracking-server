@@ -27,4 +27,14 @@ describe('TaskController', () => {
       expect(taskController.startTask('task1', 'test1').statusCode).toBe(200);
     });
   });
+
+  describe('/stop_task', () => {
+    it('does not throw on empty query', () => {
+      expect(taskController.stopTask());
+    });
+
+    it('returns statusCode:200 on empty query', () => {
+      expect(taskController.stopTask().statusCode).toBe(200);
+    });
+  });
 });

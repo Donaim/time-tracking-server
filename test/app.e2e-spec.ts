@@ -68,4 +68,25 @@ describe('AppController (e2e)', () => {
         .expect('Content-Type', /application\/json/i, done);
     });
   });
+
+  describe('/stop_task (GET)', () => {
+    it('returns json on empty query', (done) => {
+      return request(app.getHttpServer())
+        .get('/stop_task')
+        .expect('Content-Type', /application\/json/i)
+        .expect(200, done);
+    });
+
+    it('returns statusCode:200 on empty query', (done) => {
+      return request(app.getHttpServer())
+        .get('/stop_task')
+        .expect('Content-Type', /application\/json/i)
+        .expect(200)
+        .then((response) => {
+          expectField(response.text, 'statusCode', 200);
+          done();
+        })
+        .catch((err) => done(err));
+    });
+  });
 });
