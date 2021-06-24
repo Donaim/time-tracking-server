@@ -15,10 +15,18 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  describe('/ (GET)', () => {
+    it('returns 404', (done) => {
+      return request(app.getHttpServer()).get('/').expect(404, done);
+    });
+  });
+
+  describe('/ping (GET)', () => {
+    it('returns "pong"', (done) => {
+      return request(app.getHttpServer())
+        .get('/ping')
+        .expect(200)
+        .expect('pong', done);
+    });
   });
 });
