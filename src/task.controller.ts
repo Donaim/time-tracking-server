@@ -78,7 +78,7 @@ export class TaskController {
     } else {
       throw new HttpException(
         'No current task',
-        HttpStatus.INTERNAL_SERVER_ERROR,
+        HttpStatus.PRECONDITION_FAILED,
       );
     }
   }
