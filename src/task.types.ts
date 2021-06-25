@@ -61,7 +61,7 @@ type TaskRecord = {
    * Task title.
    * @type{string}
    */
-  name: string;
+  title: string;
 
   /**
    * Task description.
