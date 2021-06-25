@@ -1,17 +1,15 @@
 import Sequelize from 'sequelize';
 
-import connection = require('../connection.json');
-
 /**
  * Sequelize instance. Used to create ORM interfaces.
  */
 export const sequelize = new Sequelize.Sequelize(
-  connection.database,
-  connection.user,
-  undefined,
+  process.env.DB_SCHEMA,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
   {
-    host: connection.host,
-    port: connection.port,
+    host: process.env.DB_HOST,
+    port: parseInt(process.env.DB_PORT),
     dialect: 'postgres',
   },
 );

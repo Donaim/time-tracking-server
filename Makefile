@@ -1,4 +1,11 @@
 
+dev:
+	DB_SCHEMA=task_db \
+	DB_USER=task_user \
+	DB_HOST=localhost \
+	DB_PORT=5432 \
+	npm run start:dev
+
 docker:
 	sudo docker build -t time-tracking-server .
 
