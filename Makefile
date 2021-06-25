@@ -16,8 +16,12 @@ docker-run: docker-build
 docker-compose: docker-build
 	sudo docker-compose up
 
-postgres-run:
+postgres-run: /tmp/postgres-time-sharing-db
 	pg_ctl -l /tmp/postgres-log -o "-k /tmp" start & disown
 	sleep 5
 	psql --dbname=task_db --username=task_user || true
 	pg_ctl stop
+
+/tmp/postgres-time-sharing-db:
+	initdb -D $@
+	createdb --owner=task_user --no-password task_db
