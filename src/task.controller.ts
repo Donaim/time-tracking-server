@@ -38,16 +38,8 @@ export class TaskController {
       );
     }
 
-    try {
-      await this.taskService.startTask(title, description);
-      return { statusCode: 200 };
-    } catch (err) {
-      /* Note: do not show specific error because it is insecure */
-      throw new HttpException(
-        'Internal server error',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-    }
+    await this.taskService.startTask(title, description);
+    return { statusCode: 200 };
   }
 
   /**
