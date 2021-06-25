@@ -11,3 +11,6 @@ docker:
 
 docker-run:
 	sudo docker run -it -p 3000:3000 time-tracking-server
+
+docker-compose:
+	sudo docker-compose up
