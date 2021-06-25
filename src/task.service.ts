@@ -27,12 +27,15 @@ export class TaskService {
    */
   async stopTask(): Promise<T.StopTaskResult> {
     const result = await DB.stopTask();
-    if (result === null) {
-      return { body: { kind: T.StopTaskResultKind.OK } };
-    } else if (result === 'RecordNotFoundError') {
-      return { body: { kind: T.StopTaskResultKind.NoCurrentTask } };
-    } else {
-      return { body: { kind: T.StopTaskResultKind.Error, error: result } };
+    switch (result.body.kind) {
+      case T.DbStopTaskStatusKind.OK:
+        return { body: { kind: T.StopTaskResultKind.OK } };
+      case T.DbStopTaskStatusKind.RecordNotFound:
+        return { body: { kind: T.StopTaskResultKind.NoCurrentTask } };
+      case T.DbStopTaskStatusKind.Error:
+        return {
+          body: { kind: T.StopTaskResultKind.Error, error: result.body.error },
+        };
     }
   }
 
@@ -40,18 +43,7 @@ export class TaskService {
    * Handler for getCurrentTask request.
    * @returns {GetCurrentTaskResult}
    */
-  async getCurrentTask() {
-    const result = await DB.getCurrentTask();
-    if (result) {
-      return {
-        success: true,
-        task: result.task,
-      };
-    } else {
-      return {
-        success: false,
-        task: null,
-      };
-    }
+  async getCurrentTask(): Promise<T.GetCurrentTaskResult> {
+    return await DB.getCurrentTask();
   }
 }

@@ -38,12 +38,12 @@ export async function stopTask(): Promise<T.DbStopTaskStatus> {
     try {
       await result.update({ endt: currentt });
       Task.sync();
-      return null;
+      return { body: { kind: T.DbStopTaskStatusKind.OK } };
     } catch (err) {
-      return err;
+      return { body: { kind: T.DbStopTaskStatusKind.Error, error: err } };
     }
   } else {
-    return 'RecordNotFoundError';
+    return { body: { kind: T.DbStopTaskStatusKind.RecordNotFound } };
   }
 }
 
@@ -52,7 +52,7 @@ export async function stopTask(): Promise<T.DbStopTaskStatus> {
  * @returns {TaskDbEntry}
  * @memberof task/dbapi
  */
-export async function getCurrentTask() {
+export async function getCurrentTask(): Promise<T.TaskDbEntry> {
   const result = await getCurrentTaskRecord();
 
   if (result) {

@@ -24,13 +24,13 @@ export class TaskController {
    * Stops current task, creates new one, and makes it current.
    * @param {string} name - The name of the task.
    * @param {string=} description - Task description.
-   * @returns {StartTaskResultResponse}
+   * @returns {StartTaskResponse}
    */
   @Get('/start_task')
   startTask(
     @Query('name') name: string,
     @Query('description') description: string | undefined = undefined,
-  ): T.StartTaskResultResponse {
+  ): T.StartTaskResponse {
     if (!name) {
       throw new HttpException(
         'Name cannot be empty',
@@ -54,10 +54,10 @@ export class TaskController {
    * GET /stop_task request.
    *
    * Stops current task.
-   * @returns {StopTaskResultResponse}
+   * @returns {StopTaskResponse}
    */
   @Get('/stop_task')
-  async stopTask() {
+  async stopTask(): Promise<T.StopTaskResponse> {
     const result = await this.taskService.stopTask();
     const body = result.body;
     if (body.kind == T.StopTaskResultKind.OK) {
@@ -77,16 +77,16 @@ export class TaskController {
    * GET /get_current_task request.
    *
    * Returns current task.
-   * @returns {GetCurrentTaskResultResponse}
+   * @returns {GetCurrentTaskResponse}
    */
   @Get('/get_current_task')
-  async getCurrentTask() {
+  async getCurrentTask(): Promise<T.GetCurrentTaskResponse> {
     const result = await this.taskService.getCurrentTask();
-    if (result.success) {
+    if (result) {
       return { statusCode: 200, ...result };
     } else {
       throw new HttpException(
-        'Something went wrong',
+        'No current task',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
