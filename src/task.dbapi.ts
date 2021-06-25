@@ -68,15 +68,11 @@ export async function stopTask(): Promise<T.DbStopTaskStatus> {
   const record = await getCurrentTaskRecord();
 
   if (record) {
-    try {
-      await record.update({ endt: currentt });
-      Task.sync();
-      return { body: { kind: T.DbStopTaskStatusKind.OK } };
-    } catch (err) {
-      return { body: { kind: T.DbStopTaskStatusKind.Error, error: err } };
-    }
+    await record.update({ endt: currentt });
+    Task.sync();
+    return T.DbStopTaskStatus.OK;
   } else {
-    return { body: { kind: T.DbStopTaskStatusKind.RecordNotFound } };
+    return T.DbStopTaskStatus.RecordNotFound;
   }
 }
 

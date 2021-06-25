@@ -13,34 +13,14 @@ export type StartTaskResponse = {
   statusCode: number;
 };
 
-export enum StopTaskResultKind {
-  OK,
-  NoCurrentTask,
-  Error,
-}
-
-export type StopTaskResultOk = {
-  kind: StopTaskResultKind.OK;
-};
-
-export type StopTaskResultNoCurrentTask = {
-  kind: StopTaskResultKind.NoCurrentTask;
-};
-
-export type StopTaskResultError = {
-  kind: StopTaskResultKind.Error;
-  error: Error;
-};
-
 /**
  * Result of service stopTask operation.
  * @typedef {Object} StopTaskResult
  */
-export type StopTaskResult = {
-  /* Note: JSDoc does not handle syntax "type X = A | B | C",
-   * so redundant "body" field is introduced */
-  body: StopTaskResultOk | StopTaskResultNoCurrentTask | StopTaskResultError;
-};
+export enum StopTaskResult {
+  OK,
+  NoCurrentTask,
+}
 
 /**
  * @typedef {Object} StopTaskResponse
@@ -119,33 +99,10 @@ export type TaskDbEntry = {
   task: TaskRecord | null;
 };
 
-export enum DbStopTaskStatusKind {
-  OK,
-  RecordNotFound,
-  Error,
-}
-
-type DbStopTaskStatusOK = {
-  kind: DbStopTaskStatusKind.OK;
-};
-
-type DbStopTaskStatusRecordNotFound = {
-  kind: DbStopTaskStatusKind.RecordNotFound;
-};
-
-type DbStopTaskStatusError = {
-  kind: DbStopTaskStatusKind.Error;
-  error: Error;
-};
-
 /**
  * @typedef {Object} DbStopTaskStatus
  */
-export type DbStopTaskStatus = {
-  /* Note: JSDoc does not handle syntax "type X = A | B | C",
-   * so redundant "body" field is introduced */
-  body:
-    | DbStopTaskStatusOK
-    | DbStopTaskStatusRecordNotFound
-    | DbStopTaskStatusError;
-};
+export enum DbStopTaskStatus {
+  OK,
+  RecordNotFound,
+}
