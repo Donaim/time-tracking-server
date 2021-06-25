@@ -1,4 +1,5 @@
 import { Op, Model } from 'sequelize';
+import { sequelize } from './database';
 import * as T from './task.types';
 import { Task } from './task.dbentry';
 import { getCurrentTimestamp } from './time';
@@ -60,10 +61,14 @@ export async function startTask(
     endt: null,
   };
 
-  /* TODO: investigate broken sequelize.transaction
-   * which should be used here. */
-  await oldRecord.update({ ...oldTask, endt: currentt });
-  await Task.create(newTask);
+  await sequelize.transaction(async (t) => {
+    const update = oldRecord.update(
+      { ...oldTask, endt: currentt },
+      { transaction: t },
+    );
+    const create = Task.create(newTask, { transaction: t });
+    await Promise.all([update, create]);
+  });
 
   Task.sync();
 }
