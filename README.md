@@ -17,6 +17,9 @@ followed by `npm install && make dev` (in another terminal).
 To generate documentation run `npm install && npm run docs` 
 and then open `docs/index.html`.
 
+Server API reference is available at `localhost:3000/api` when server is run.
+It is generated with `Nest.js/swagger`, so it is human-readable.
+
 # License
 
 GPL-3.0 or later.
