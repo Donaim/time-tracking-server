@@ -13,7 +13,7 @@ export class TaskService {
    * Handler for startTask request.
    * @param {string} title - The title of the task.
    * @param {string=} description - Task description.
-   * @returns {null | Error}
+   * @returns {void}
    */
   async startTask(title: string, description: string | null): Promise<void> {
     await DB.startTask(title, description);
@@ -25,15 +25,11 @@ export class TaskService {
    */
   async stopTask(): Promise<T.StopTaskResult> {
     const result = await DB.stopTask();
-    switch (result.body.kind) {
-      case T.DbStopTaskStatusKind.OK:
-        return { body: { kind: T.StopTaskResultKind.OK } };
-      case T.DbStopTaskStatusKind.RecordNotFound:
-        return { body: { kind: T.StopTaskResultKind.NoCurrentTask } };
-      case T.DbStopTaskStatusKind.Error:
-        return {
-          body: { kind: T.StopTaskResultKind.Error, error: result.body.error },
-        };
+    switch (result) {
+      case T.DbStopTaskStatus.OK:
+        return T.StopTaskResult.OK;
+      case T.DbStopTaskStatus.RecordNotFound:
+        return T.StopTaskResult.NoCurrentTask;
     }
   }
 

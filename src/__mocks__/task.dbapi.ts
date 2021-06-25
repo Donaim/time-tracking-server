@@ -5,7 +5,7 @@ export async function startTask() {
 }
 
 export async function stopTask() {
-  return { body: { kind: T.DbStopTaskStatusKind.OK } };
+  return T.DbStopTaskStatus.OK;
 }
 
 export async function getCurrentTask() {

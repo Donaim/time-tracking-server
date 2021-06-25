@@ -60,19 +60,13 @@ export class TaskController {
   @Get('/stop_task')
   async stopTask(): Promise<T.StopTaskResponse> {
     const result = await this.taskService.stopTask();
-    switch (result.body.kind) {
-      case T.StopTaskResultKind.OK:
+    switch (result) {
+      case T.StopTaskResult.OK:
         return { statusCode: 200 };
-      case T.StopTaskResultKind.NoCurrentTask:
+      case T.StopTaskResult.NoCurrentTask:
         throw new HttpException(
           'No current task',
           HttpStatus.PRECONDITION_FAILED,
-        );
-      case T.StopTaskResultKind.Error:
-        /* Note: do not show specific error because it is insecure */
-        throw new HttpException(
-          'Internal server error',
-          HttpStatus.INTERNAL_SERVER_ERROR,
         );
     }
   }
