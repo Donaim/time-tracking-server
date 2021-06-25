@@ -1,6 +1,0 @@
-{
-  "host": "localhost",
-  "port": 5432,
-  "database": "task_db",
-  "user": "task_user"
-}
