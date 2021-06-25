@@ -24,13 +24,13 @@ export class TaskController {
    * Stops current task, creates new one, and makes it current.
    * @param {string} name - The name of the task.
    * @param {string=} description - Task description.
-   * @returns {StartTaskResultResponse}
+   * @returns {StartTaskResponse}
    */
   @Get('/start_task')
-  startTask(
+  async startTask(
     @Query('name') name: string,
-    @Query('description') description: string | undefined = undefined,
-  ): T.StartTaskResultResponse {
+    @Query('description') description: string | null = null,
+  ): Promise<T.StartTaskResponse> {
     if (!name) {
       throw new HttpException(
         'Name cannot be empty',
@@ -38,12 +38,13 @@ export class TaskController {
       );
     }
 
-    const result = this.taskService.startTask(name, description);
-    if (result.success) {
+    try {
+      await this.taskService.startTask(name, description);
       return { statusCode: 200 };
-    } else {
+    } catch (err) {
+      /* Note: do not show specific error because it is insecure */
       throw new HttpException(
-        'Something went wrong',
+        'Internal server error',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
@@ -54,18 +55,25 @@ export class TaskController {
    * GET /stop_task request.
    *
    * Stops current task.
-   * @returns {StopTaskResultResponse}
+   * @returns {StopTaskResponse}
    */
   @Get('/stop_task')
-  stopTask(): T.StopTaskResultResponse {
-    const result = this.taskService.stopTask();
-    if (result.success) {
-      return { statusCode: 200 };
-    } else {
-      throw new HttpException(
-        'Something went wrong',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+  async stopTask(): Promise<T.StopTaskResponse> {
+    const result = await this.taskService.stopTask();
+    switch (result.body.kind) {
+      case T.StopTaskResultKind.OK:
+        return { statusCode: 200 };
+      case T.StopTaskResultKind.NoCurrentTask:
+        throw new HttpException(
+          'No current task',
+          HttpStatus.PRECONDITION_FAILED,
+        );
+      case T.StopTaskResultKind.Error:
+        /* Note: do not show specific error because it is insecure */
+        throw new HttpException(
+          'Internal server error',
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
     }
   }
 
@@ -74,16 +82,16 @@ export class TaskController {
    * GET /get_current_task request.
    *
    * Returns current task.
-   * @returns {GetCurrentTaskResultResponse}
+   * @returns {GetCurrentTaskResponse}
    */
   @Get('/get_current_task')
-  getCurrentTask(): T.GetCurrentTaskResultResponse {
-    const result = this.taskService.getCurrentTask();
-    if (result.success) {
+  async getCurrentTask(): Promise<T.GetCurrentTaskResponse> {
+    const result = await this.taskService.getCurrentTask();
+    if (result) {
       return { statusCode: 200, ...result };
     } else {
       throw new HttpException(
-        'Something went wrong',
+        'No current task',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
