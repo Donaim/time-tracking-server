@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
+import { ApiOperation } from '@nestjs/swagger';
 import { AppService } from './app.service';
 
 /**
@@ -9,12 +10,11 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  /**
-   * GET /ping request.
-   * Returns "pong" in text/plain.
-   * Useful to probe server availability.
-   */
   @Get('/ping')
+  @ApiOperation({
+    summary:
+      'Returns "pong" in text/plain. Useful to probe server availability.',
+  })
   getPing(): string {
     return this.appService.getPing();
   }

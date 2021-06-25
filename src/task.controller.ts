@@ -6,6 +6,7 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { TaskService } from './task.service';
+import { ApiOperation, ApiParam } from '@nestjs/swagger';
 import * as T from './task.types';
 
 /**
@@ -17,16 +18,16 @@ import * as T from './task.types';
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
-  /**
-   * Handler for
-   * GET /start_task request.
-   *
-   * Stops current task, creates new one, and makes it current.
-   * @param {string} title - The title of the task.
-   * @param {string=} description - Task description.
-   * @returns {StartTaskResponse}
-   */
   @Get('/start_task')
+  @ApiParam({ name: 'title', required: true, description: 'Task title' })
+  @ApiParam({
+    name: 'description',
+    required: false,
+    description: 'Task description',
+  })
+  @ApiOperation({
+    summary: 'Stops current task, creates new one, and makes it current',
+  })
   async startTask(
     @Query('title') title: string,
     @Query('description') description: string | null = null,
@@ -42,14 +43,8 @@ export class TaskController {
     return { statusCode: 200 };
   }
 
-  /**
-   * Handler for
-   * GET /stop_task request.
-   *
-   * Stops current task.
-   * @returns {StopTaskResponse}
-   */
   @Get('/stop_task')
+  @ApiOperation({ summary: 'Stops current task' })
   async stopTask(): Promise<T.StopTaskResponse> {
     const result = await this.taskService.stopTask();
     switch (result) {
@@ -63,14 +58,13 @@ export class TaskController {
     }
   }
 
-  /**
-   * Handler for
-   * GET /get_current_task request.
-   *
-   * Returns current task.
-   * @returns {GetCurrentTaskResponse}
-   */
   @Get('/get_current_task')
+  /* TODO: find a way to provide examples within Nest.js/swagger API */
+  @ApiOperation({
+    summary: 'Returns current task',
+    description:
+      'example response: { "statusCode": 200, "title": "A", "description": null, "startt": 12345, "endt": null }',
+  })
   async getCurrentTask(): Promise<T.GetCurrentTaskResponse> {
     const result = await this.taskService.getCurrentTask();
     if (result) {
