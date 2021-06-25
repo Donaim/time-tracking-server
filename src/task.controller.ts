@@ -77,8 +77,8 @@ export class TaskController {
    * @returns {GetCurrentTaskResultResponse}
    */
   @Get('/get_current_task')
-  getCurrentTask(): T.GetCurrentTaskResultResponse {
-    const result = this.taskService.getCurrentTask();
+  async getCurrentTask() {
+    const result = await this.taskService.getCurrentTask();
     if (result.success) {
       return { statusCode: 200, ...result };
     } else {

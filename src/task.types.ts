@@ -107,3 +107,13 @@ export type GetCurrentTaskResultResponse = {
    */
   task: TaskRecord;
 };
+
+/**
+ * @typedef {Object} GetCurrentTaskDbEntry
+ */
+export type GetCurrentTaskDbEntry = {
+  /**
+   * @type {TaskRecord=}
+   */
+  task: TaskRecord | null;
+};

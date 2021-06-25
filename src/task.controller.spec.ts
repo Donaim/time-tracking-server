@@ -41,12 +41,14 @@ describe('TaskController', () => {
   });
 
   describe('/get_current_task', () => {
-    it('does not throw on empty query', () => {
-      expect(taskController.getCurrentTask());
+    it('does not throw on empty query', async () => {
+      const result = await taskController.getCurrentTask();
+      expect(result);
     });
 
-    it('returns statusCode:200 on empty query', () => {
-      expect(taskController.getCurrentTask().statusCode).toBe(200);
+    it('returns statusCode:200 on empty query', async () => {
+      const result = await taskController.getCurrentTask();
+      expect(result.statusCode).toBe(200);
     });
   });
 });

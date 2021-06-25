@@ -1,4 +1,3 @@
-
 /**
  * Functions related to date/time.
  * @namespace time
@@ -9,6 +8,6 @@
  * @memberof time
  */
 export function getCurrentTimestamp() {
-    const withMilliseconds = new Date().getTime();
-    return Math.floor(withMilliseconds / 1000);
+  const withMilliseconds = new Date().getTime();
+  return Math.floor(withMilliseconds / 1000);
 }
