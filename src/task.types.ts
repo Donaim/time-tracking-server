@@ -36,7 +36,7 @@ export type StopTaskResponse = {
 /**
  * @typedef {Object} TaskRecord
  */
-type TaskRecord = {
+export type TaskRecord = {
   /**
    * Task title.
    * @type{string}
