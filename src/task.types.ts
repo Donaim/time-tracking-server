@@ -24,15 +24,33 @@ export type StartTaskResultResponse = {
   statusCode: number;
 };
 
+export enum StopTaskResultKind {
+  OK,
+  NoCurrentTask,
+  Error,
+}
+
+export type StopTaskResultOk = {
+  kind: StopTaskResultKind.OK;
+};
+
+export type StopTaskResultNoCurrentTask = {
+  kind: StopTaskResultKind.NoCurrentTask;
+};
+
+export type StopTaskResultError = {
+  kind: StopTaskResultKind.Error;
+  error: Error;
+};
+
 /**
+ * Result of service stopTask operation.
  * @typedef {Object} StopTaskResult
  */
 export type StopTaskResult = {
-  /**
-   * Status flag that is true only when everything succeded.
-   * @type{boolean}
-   */
-  success: boolean;
+  /* Note: JSDoc does not handle syntax "type X = A | B | C",
+   * so redundant "body" field is introduced */
+  body: StopTaskResultOk | StopTaskResultNoCurrentTask | StopTaskResultError;
 };
 
 /**
@@ -117,3 +135,8 @@ export type TaskDbEntry = {
    */
   task: TaskRecord | null;
 };
+
+/**
+ * @typedef {Object} DbStopTaskStatus
+ */
+export type DbStopTaskStatus = null | 'RecordNotFoundError' | Error;

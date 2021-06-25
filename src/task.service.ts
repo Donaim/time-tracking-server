@@ -25,9 +25,15 @@ export class TaskService {
    * Handler for stopTask request.
    * @returns {StopTaskResult}
    */
-  stopTask(): T.StopTaskResult {
-    // TODO: database requests
-    return { success: true };
+  async stopTask(): Promise<T.StopTaskResult> {
+    const result = await DB.stopTask();
+    if (result === null) {
+      return { body: { kind: T.StopTaskResultKind.OK } };
+    } else if (result === 'RecordNotFoundError') {
+      return { body: { kind: T.StopTaskResultKind.NoCurrentTask } };
+    } else {
+      return { body: { kind: T.StopTaskResultKind.Error, error: result } };
+    }
   }
 
   /**

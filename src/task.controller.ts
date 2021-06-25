@@ -57,15 +57,18 @@ export class TaskController {
    * @returns {StopTaskResultResponse}
    */
   @Get('/stop_task')
-  stopTask(): T.StopTaskResultResponse {
-    const result = this.taskService.stopTask();
-    if (result.success) {
+  async stopTask() {
+    const result = await this.taskService.stopTask();
+    const body = result.body;
+    if (body.kind == T.StopTaskResultKind.OK) {
       return { statusCode: 200 };
     } else {
-      throw new HttpException(
-        'Something went wrong',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      /* Note: do not show the user specific error because that is insecure */
+      const message =
+        body.kind == T.StopTaskResultKind.NoCurrentTask
+          ? 'No current task'
+          : 'Internal server error';
+      throw new HttpException(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 

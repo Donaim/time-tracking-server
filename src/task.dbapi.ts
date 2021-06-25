@@ -10,14 +10,12 @@ import { getCurrentTimestamp } from './time';
  */
 
 /**
- * Fetches current task database record.
- * @returns {TaskDbEntry}
+ * Helper function for fetching current database record.
  * @memberof task/dbapi
  */
-export async function getCurrentTask() {
+async function getCurrentTaskRecord() {
   const currentt = getCurrentTimestamp();
-
-  const result = await Task.findOne({
+  return await Task.findOne({
     where: {
       endt: null,
       startt: {
@@ -25,6 +23,37 @@ export async function getCurrentTask() {
       },
     },
   });
+}
+
+/**
+ * Updates database entry related to current task.
+ * @returns {DbStopTaskStatus}
+ * @memberof task/dbapi
+ */
+export async function stopTask(): Promise<T.DbStopTaskStatus> {
+  const currentt = getCurrentTimestamp();
+  const result = await getCurrentTaskRecord();
+
+  if (result) {
+    try {
+      await result.update({ endt: currentt });
+      Task.sync();
+      return null;
+    } catch (err) {
+      return err;
+    }
+  } else {
+    return 'RecordNotFoundError';
+  }
+}
+
+/**
+ * Fetches current task database record.
+ * @returns {TaskDbEntry}
+ * @memberof task/dbapi
+ */
+export async function getCurrentTask() {
+  const result = await getCurrentTaskRecord();
 
   if (result) {
     const ret: T.TaskDbEntry = {
