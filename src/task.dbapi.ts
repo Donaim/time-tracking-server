@@ -53,7 +53,6 @@ export async function startTask(
 ): Promise<void> {
   const currentt = getCurrentTimestamp();
   const oldRecord = await getCurrentTaskRecord();
-  const oldTask = dbRecordToTaskRecord(oldRecord);
   const newTask: T.TaskRecord = {
     title: title,
     description: description,
@@ -62,12 +61,14 @@ export async function startTask(
   };
 
   await sequelize.transaction(async (t) => {
-    const update = oldRecord.update(
-      { ...oldTask, endt: currentt },
-      { transaction: t },
-    );
+    const update = () => {
+      if (oldRecord) {
+        const oldTask = dbRecordToTaskRecord(oldRecord);
+        oldRecord.update({ ...oldTask, endt: currentt }, { transaction: t });
+      }
+    };
     const create = Task.create(newTask, { transaction: t });
-    await Promise.all([update, create]);
+    await Promise.all([update(), create]);
   });
 }
 
