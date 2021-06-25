@@ -11,7 +11,7 @@ export async function stopTask() {
 export async function getCurrentTask() {
   const ret: T.TaskDbEntry = {
     task: {
-      name: 'testname',
+      title: 'testtitle',
       description: 'test-description',
       startt: 12345,
       endt: null,

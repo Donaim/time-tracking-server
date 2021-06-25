@@ -40,7 +40,7 @@ export async function startTask(
   const record = await getCurrentTaskRecord();
   const newRecord: T.TaskDbEntry = {
     task: {
-      name: title,
+      title: title,
       description: description,
       startt: currentt,
       endt: null,
@@ -91,7 +91,7 @@ export async function getCurrentTask(): Promise<T.TaskDbEntry> {
   if (record) {
     const ret: T.TaskDbEntry = {
       task: {
-        name: record.getDataValue('title'),
+        title: record.getDataValue('title'),
         description: record.getDataValue('description'),
         startt: record.getDataValue('startt'),
         endt: record.getDataValue('endt'),

@@ -22,24 +22,24 @@ export class TaskController {
    * GET /start_task request.
    *
    * Stops current task, creates new one, and makes it current.
-   * @param {string} name - The name of the task.
+   * @param {string} title - The title of the task.
    * @param {string=} description - Task description.
    * @returns {StartTaskResponse}
    */
   @Get('/start_task')
   async startTask(
-    @Query('name') name: string,
+    @Query('title') title: string,
     @Query('description') description: string | null = null,
   ): Promise<T.StartTaskResponse> {
-    if (!name) {
+    if (!title) {
       throw new HttpException(
-        'Name cannot be empty',
+        'Title cannot be empty',
         HttpStatus.PRECONDITION_FAILED,
       );
     }
 
     try {
-      await this.taskService.startTask(name, description);
+      await this.taskService.startTask(title, description);
       return { statusCode: 200 };
     } catch (err) {
       /* Note: do not show specific error because it is insecure */

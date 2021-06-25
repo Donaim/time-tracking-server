@@ -11,12 +11,12 @@ import * as DB from './task.dbapi';
 export class TaskService {
   /**
    * Handler for startTask request.
-   * @param {string} name - The name of the task.
+   * @param {string} title - The title of the task.
    * @param {string=} description - Task description.
    * @returns {null | Error}
    */
-  async startTask(name: string, description: string | null): Promise<void> {
-    await DB.startTask(name, description);
+  async startTask(title: string, description: string | null): Promise<void> {
+    await DB.startTask(title, description);
   }
 
   /**

@@ -38,16 +38,16 @@ describe('AppController (e2e)', () => {
   }
 
   describe('/start_task (GET)', () => {
-    it('returns json on "?name=task1&description=test1"', (done) => {
+    it('returns json on "?title=task1&description=test1"', (done) => {
       return request(app.getHttpServer())
-        .get('/start_task?name=task1&description=test1')
+        .get('/start_task?title=task1&description=test1')
         .expect('Content-Type', /application\/json/i)
         .expect(200, done);
     });
 
-    it('returns statusCode:200 on "?name=task1&description=test1"', (done) => {
+    it('returns statusCode:200 on "?title=task1&description=test1"', (done) => {
       return request(app.getHttpServer())
-        .get('/start_task?name=task1&description=test1')
+        .get('/start_task?title=task1&description=test1')
         .expect('Content-Type', /application\/json/i)
         .expect(200)
         .then((response) => {
@@ -64,14 +64,14 @@ describe('AppController (e2e)', () => {
         .expect(412, done);
     });
 
-    it('errors on "?name=&description=test1"', (done) => {
+    it('errors on "?title=&description=test1"', (done) => {
       return request(app.getHttpServer())
-        .get('/start_task?name=&description=test1')
+        .get('/start_task?title=&description=test1')
         .expect('Content-Type', /application\/json/i)
         .expect(412, done);
     });
 
-    it('returns json on "?name=task1"', (done) => {
+    it('returns json on "?title=task1"', (done) => {
       return request(app.getHttpServer())
         .get('/start_task?description=test1')
         .expect('Content-Type', /application\/json/i, done);
