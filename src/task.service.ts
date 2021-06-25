@@ -12,13 +12,11 @@ export class TaskService {
   /**
    * Handler for startTask request.
    * @param {string} name - The name of the task.
-   * @param {string} description - Task description.
-   * @returns {StartTaskResult}
+   * @param {string=} description - Task description.
+   * @returns {null | Error}
    */
-  startTask(name: string, description: string | undefined): T.StartTaskResult {
-    // TODO: database requests
-    name = name + description;
-    return { success: true };
+  async startTask(name: string, description: string | null): Promise<void> {
+    await DB.startTask(name, description);
   }
 
   /**

@@ -27,10 +27,10 @@ export class TaskController {
    * @returns {StartTaskResponse}
    */
   @Get('/start_task')
-  startTask(
+  async startTask(
     @Query('name') name: string,
-    @Query('description') description: string | undefined = undefined,
-  ): T.StartTaskResponse {
+    @Query('description') description: string | null = null,
+  ): Promise<T.StartTaskResponse> {
     if (!name) {
       throw new HttpException(
         'Name cannot be empty',
@@ -38,12 +38,13 @@ export class TaskController {
       );
     }
 
-    const result = this.taskService.startTask(name, description);
-    if (result.success) {
+    try {
+      await this.taskService.startTask(name, description);
       return { statusCode: 200 };
-    } else {
+    } catch (err) {
+      /* Note: do not show specific error because it is insecure */
       throw new HttpException(
-        'Something went wrong',
+        'Internal server error',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
@@ -59,16 +60,20 @@ export class TaskController {
   @Get('/stop_task')
   async stopTask(): Promise<T.StopTaskResponse> {
     const result = await this.taskService.stopTask();
-    const body = result.body;
-    if (body.kind == T.StopTaskResultKind.OK) {
-      return { statusCode: 200 };
-    } else {
-      /* Note: do not show the user specific error because that is insecure */
-      const message =
-        body.kind == T.StopTaskResultKind.NoCurrentTask
-          ? 'No current task'
-          : 'Internal server error';
-      throw new HttpException(message, HttpStatus.INTERNAL_SERVER_ERROR);
+    switch (result.body.kind) {
+      case T.StopTaskResultKind.OK:
+        return { statusCode: 200 };
+      case T.StopTaskResultKind.NoCurrentTask:
+        throw new HttpException(
+          'No current task',
+          HttpStatus.PRECONDITION_FAILED,
+        );
+      case T.StopTaskResultKind.Error:
+        /* Note: do not show specific error because it is insecure */
+        throw new HttpException(
+          'Internal server error',
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
     }
   }
 

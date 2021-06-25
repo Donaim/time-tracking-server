@@ -1,5 +1,9 @@
 import * as T from '../task.types';
 
+export async function startTask() {
+  return null;
+}
+
 export async function stopTask() {
   return { body: { kind: T.DbStopTaskStatusKind.OK } };
 }

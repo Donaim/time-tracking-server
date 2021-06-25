@@ -29,3 +29,8 @@ export async function testConnection() {
     return err;
   }
 }
+
+/**
+ * Performs database transaction.
+ */
+export const transaction = sequelize.transaction;

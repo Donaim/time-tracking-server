@@ -3,17 +3,6 @@
  */
 
 /**
- * @typedef {Object} StartTaskResult
- */
-export type StartTaskResult = {
-  /**
-   * Status flag that is true only when everything succeded.
-   * @type{boolean}
-   */
-  success: boolean;
-};
-
-/**
  * @typedef {Object} StartTaskResponse
  */
 export type StartTaskResponse = {

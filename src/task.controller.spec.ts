@@ -17,16 +17,19 @@ describe('TaskController', () => {
   });
 
   describe('/start_task', () => {
-    it('does not throw on "?name=task1&description=test1"', () => {
-      expect(taskController.startTask('task1', 'test1'));
+    it('does not throw on "?name=task1&description=test1"', async () => {
+      const result = await taskController.startTask('task1', 'test1');
+      expect(result);
     });
 
-    it('does not throw on "?name=task1"', () => {
-      expect(taskController.startTask('task1', 'test1'));
+    it('does not throw on "?name=task1"', async () => {
+      const result = await taskController.startTask('task1', undefined);
+      expect(result);
     });
 
-    it('returns statusCode:200 on "?name=task1&description=test1"', () => {
-      expect(taskController.startTask('task1', 'test1').statusCode).toBe(200);
+    it('returns statusCode:200 on "?name=task1&description=test1"', async () => {
+      const result = await taskController.startTask('task1', 'test1');
+      expect(result.statusCode).toBe(200);
     });
   });
 
