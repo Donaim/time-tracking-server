@@ -47,6 +47,36 @@ export type StopTaskResultResponse = {
 };
 
 /**
+ * @typedef {Object} TaskRecord
+ */
+type TaskRecord = {
+  /**
+   * Task title.
+   * @type{string}
+   */
+  name: string;
+
+  /**
+   * Task description.
+   * @type{string=}
+   */
+  description: string | null;
+
+  /**
+   * Task start time as Unix timestamp in UTC.
+   * @type{number}
+   */
+  startt: number;
+
+  /**
+   * Task end time as Unix timestamp in UTC.
+   * Null if not finished.
+   * @type{number=}
+   */
+  endt: number | null;
+};
+
+/**
  * @typedef {Object} GetCurrentTaskResult
  */
 export type GetCurrentTaskResult = {
@@ -55,8 +85,11 @@ export type GetCurrentTaskResult = {
    * @type{boolean}
    */
   success: boolean;
-  name: string;
-  description: string;
+
+  /**
+   * @type {TaskRecord}
+   */
+  task: TaskRecord;
 };
 
 /**
@@ -68,6 +101,9 @@ export type GetCurrentTaskResultResponse = {
    * @type{number}
    */
   statusCode: number;
-  name: string;
-  description: string;
+
+  /**
+   * @type {TaskRecord}
+   */
+  task: TaskRecord;
 };
