@@ -1,5 +1,4 @@
-import { Op } from 'sequelize';
-import { transaction } from './database';
+import { Op, Model } from 'sequelize';
 import * as T from './task.types';
 import { Task } from './task.dbentry';
 import { getCurrentTimestamp } from './time';
@@ -13,6 +12,7 @@ import { getCurrentTimestamp } from './time';
 /**
  * Helper function for fetching current database record.
  * @memberof task/dbapi
+ * @returns {Model<any, any>}
  */
 async function getCurrentTaskRecord() {
   const currentt = getCurrentTimestamp();
@@ -27,6 +27,20 @@ async function getCurrentTaskRecord() {
 }
 
 /**
+ * Helper function to transform task database record into task structure.
+ * @memberof task/dbapi
+ * @returns {TaskRecord}
+ */
+function dbRecordToTaskRecord(record: Model<any, any>): T.TaskRecord {
+  return {
+    title: record.getDataValue('title'),
+    description: record.getDataValue('description'),
+    startt: record.getDataValue('startt'),
+    endt: record.getDataValue('endt'),
+  };
+}
+
+/**
  * Updates database entry related to current task,
  * and inserts new task to the database.
  * @returns {null | Error}
@@ -37,23 +51,19 @@ export async function startTask(
   description: string | null,
 ): Promise<void> {
   const currentt = getCurrentTimestamp();
-  const record = await getCurrentTaskRecord();
-  const newRecord: T.TaskDbEntry = {
-    task: {
-      title: title,
-      description: description,
-      startt: currentt,
-      endt: null,
-    },
+  const oldRecord = await getCurrentTaskRecord();
+  const oldTask = dbRecordToTaskRecord(oldRecord);
+  const newTask: T.TaskRecord = {
+    title: title,
+    description: description,
+    startt: currentt,
+    endt: null,
   };
 
-  await transaction(async (t) => {
-    if (record) {
-      await record.update({ endt: currentt }, { transaction: t });
-    }
-
-    await Task.create(newRecord, { transaction: t });
-  });
+  /* TODO: investigate broken sequelize.transaction
+   * which should be used here. */
+  await oldRecord.update({ ...oldTask, endt: currentt });
+  await Task.create(newTask);
 
   Task.sync();
 }
@@ -85,14 +95,7 @@ export async function getCurrentTask(): Promise<T.TaskDbEntry> {
   const record = await getCurrentTaskRecord();
 
   if (record) {
-    const ret: T.TaskDbEntry = {
-      task: {
-        title: record.getDataValue('title'),
-        description: record.getDataValue('description'),
-        startt: record.getDataValue('startt'),
-        endt: record.getDataValue('endt'),
-      },
-    };
+    const ret: T.TaskDbEntry = { task: dbRecordToTaskRecord(record) };
     return ret;
   } else {
     return null;
