@@ -1,7 +1,7 @@
 import * as T from '../task.types';
 
 export async function getCurrentTask() {
-  const ret: T.GetCurrentTaskDbEntry = {
+  const ret: T.TaskDbEntry = {
     task: {
       name: 'testname',
       description: 'test-description',

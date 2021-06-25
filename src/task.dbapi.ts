@@ -11,7 +11,7 @@ import { getCurrentTimestamp } from './time';
 
 /**
  * Fetches current task database record.
- * @returns {GetCurrentTaskDbEntry}
+ * @returns {TaskDbEntry}
  * @memberof task/dbapi
  */
 export async function getCurrentTask() {
@@ -27,7 +27,7 @@ export async function getCurrentTask() {
   });
 
   if (result) {
-    const ret: T.GetCurrentTaskDbEntry = {
+    const ret: T.TaskDbEntry = {
       task: {
         name: result.getDataValue('title'),
         description: result.getDataValue('description'),

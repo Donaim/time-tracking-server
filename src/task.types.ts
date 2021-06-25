@@ -109,9 +109,9 @@ export type GetCurrentTaskResultResponse = {
 };
 
 /**
- * @typedef {Object} GetCurrentTaskDbEntry
+ * @typedef {Object} TaskDbEntry
  */
-export type GetCurrentTaskDbEntry = {
+export type TaskDbEntry = {
   /**
    * @type {TaskRecord=}
    */
