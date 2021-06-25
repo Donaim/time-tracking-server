@@ -35,6 +35,9 @@ export class TaskService {
    */
   getCurrentTask(): T.GetCurrentTaskResult {
     // TODO: database requests
-    return { success: true, name: 'TODO', description: 'TODO' };
+    return {
+      success: true,
+      task: { name: 'TODO', description: null, startt: 0, endt: null },
+    };
   }
 }
