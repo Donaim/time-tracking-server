@@ -16,3 +16,5 @@ export const Task = sequelize.define(
     timestamps: false,
   },
 );
+
+Task.sync();

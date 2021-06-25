@@ -69,8 +69,6 @@ export async function startTask(
     const create = Task.create(newTask, { transaction: t });
     await Promise.all([update, create]);
   });
-
-  Task.sync();
 }
 
 /**
@@ -84,7 +82,6 @@ export async function stopTask(): Promise<T.DbStopTaskStatus> {
 
   if (record) {
     await record.update({ endt: currentt });
-    Task.sync();
     return T.DbStopTaskStatus.OK;
   } else {
     return T.DbStopTaskStatus.RecordNotFound;
