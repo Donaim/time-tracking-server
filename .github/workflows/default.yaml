@@ -27,12 +27,10 @@ jobs:
 
   e2etest:
     runs-on: ubuntu-latest
-
     steps:
       - name: Git checkout4
         uses: actions/checkout@v2
-      - run: npm install
-      - run: npm run test:e2e
+      - run: make docker-test
 
   docs:
     runs-on: ubuntu-latest
