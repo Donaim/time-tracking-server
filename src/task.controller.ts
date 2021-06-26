@@ -6,7 +6,7 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { TaskService } from './task.service';
-import { ApiOperation, ApiParam } from '@nestjs/swagger';
+import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import * as T from './task.types';
 
 /**
@@ -29,6 +29,11 @@ export class TaskController {
   @ApiOperation({
     summary: 'Stops current task, creates new one, and makes it current',
   })
+  @ApiResponse({
+    status: 200,
+    description:
+      'Task successfully started. Example response: { "statusCode": 200 }',
+  })
   async startTask(
     @Query('title') title: string,
     @Query('description') description: string | null = null,
@@ -46,6 +51,11 @@ export class TaskController {
 
   @Get('/stop_task')
   @ApiOperation({ summary: 'Stops current task' })
+  @ApiResponse({
+    status: 200,
+    description:
+      'Task successfully stoped. Example response: { "statusCode": 200 }',
+  })
   async stopTask(): Promise<T.StopTaskResponse> {
     const result = await this.taskService.stopTask();
     switch (result) {
@@ -60,11 +70,11 @@ export class TaskController {
   }
 
   @Get('/get_current_task')
-  /* TODO: find a way to provide examples within Nest.js/swagger API */
-  @ApiOperation({
-    summary: 'Returns current task',
+  @ApiOperation({ summary: 'Returns current task' })
+  @ApiResponse({
+    status: 200,
     description:
-      'example response: { "statusCode": 200, "title": "A", "description": null, "startt": 12345, "endt": null }',
+      'All OK. Example response: { "statusCode": 200, "title": "A", "description": null, "startt": 12345, "endt": null }',
   })
   async getCurrentTask(): Promise<T.GetCurrentTaskResponse> {
     const result = await this.taskService.getCurrentTask();

@@ -13,8 +13,8 @@ export class AppController {
 
   @Get('/ping')
   @ApiOperation({
-    summary:
-      'Returns "pong" in text/plain. Useful to probe server availability.',
+    summary: 'Responds with "pong"',
+    description: 'Use to probe server availability.',
   })
   getPing(): string {
     return this.appService.getPing();
