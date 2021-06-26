@@ -1,5 +1,4 @@
 /**
- * @file
  * dynamicScope is for passing
  * objects inside mocked objects
  */
