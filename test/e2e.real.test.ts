@@ -3,8 +3,6 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 
-jest.mock('../src/task.dbapi');
-
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
@@ -73,29 +71,8 @@ describe('AppController (e2e)', () => {
 
     it('returns json on "?title=task1"', (done) => {
       return request(app.getHttpServer())
-        .get('/start_task?description=test1')
+        .get('/start_task?title=task1')
         .expect('Content-Type', /application\/json/i, done);
-    });
-  });
-
-  describe('/stop_task (GET)', () => {
-    it('returns json on empty query', (done) => {
-      return request(app.getHttpServer())
-        .get('/stop_task')
-        .expect('Content-Type', /application\/json/i)
-        .expect(200, done);
-    });
-
-    it('returns statusCode:200 on empty query', (done) => {
-      return request(app.getHttpServer())
-        .get('/stop_task')
-        .expect('Content-Type', /application\/json/i)
-        .expect(200)
-        .then((response) => {
-          expectField(response.text, 'statusCode', 200);
-          done();
-        })
-        .catch((err) => done(err));
     });
   });
 
@@ -110,6 +87,35 @@ describe('AppController (e2e)', () => {
     it('returns statusCode:200 on empty query', (done) => {
       return request(app.getHttpServer())
         .get('/get_current_task')
+        .expect('Content-Type', /application\/json/i)
+        .expect(200)
+        .then((response) => {
+          expectField(response.text, 'statusCode', 200);
+          done();
+        })
+        .catch((err) => done(err));
+    });
+
+    it('returns expected task on empty query', (done) => {
+      return request(app.getHttpServer())
+        .get('/get_current_task')
+        .expect('Content-Type', /application\/json/i)
+        .expect(200)
+        .then((response) => {
+          const json = JSON.parse(response.text);
+          expect(json.task.title).toBe('task1');
+          expect(json.task.description).toBe(null);
+          expect(json.task.endt).toBe(null);
+          done();
+        })
+        .catch((err) => done(err));
+    });
+  });
+
+  describe('/stop_task (GET)', () => {
+    it('returns statusCode:200 on empty query', (done) => {
+      return request(app.getHttpServer())
+        .get('/stop_task')
         .expect('Content-Type', /application\/json/i)
         .expect(200)
         .then((response) => {

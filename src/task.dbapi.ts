@@ -17,7 +17,8 @@ import { getCurrentTimestamp } from './time';
  */
 async function getCurrentTaskRecord() {
   const currentt = getCurrentTimestamp();
-  return await Task.findOne({
+  const api = await Task();
+  return await api.findOne({
     where: {
       endt: null,
       startt: {
@@ -67,7 +68,8 @@ export async function startTask(
         oldRecord.update({ ...oldTask, endt: currentt }, { transaction: t });
       }
     };
-    const create = Task.create(newTask, { transaction: t });
+    const api = await Task();
+    const create = api.create(newTask, { transaction: t });
     await Promise.all([update(), create]);
   });
 }
