@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 /**
  * Root module controller.
  * Handles some miscellanous stateless requests.
+ * @namespace
  */
 @Controller()
 export class AppController {

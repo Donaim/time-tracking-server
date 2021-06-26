@@ -6,6 +6,7 @@ import * as DB from './task.dbapi';
  * Task module service.
  * Packs and unpacks messages for {@link task/dbapi}.
  * Used by {@link TaskController}.
+ * @namespace
  */
 @Injectable()
 export class TaskService {
