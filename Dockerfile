@@ -8,4 +8,4 @@ USER app
 COPY . .
 RUN npm install
 EXPOSE 3000
-CMD [ "npm", "run", "test:e2e" ]
+CMD [ "npm", "run", "start" ]
