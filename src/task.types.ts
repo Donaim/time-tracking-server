@@ -1,9 +1,19 @@
 /**
- * @file Contains type definitions related to task operations.
+ * This file contains type definitions related to task operations.
+ * @namespace task/types
  */
 
 /**
+ * This variable is here to make JSDoc
+ * work with a file that only contains type definitions.
+ * @memberof task/types
+ * @private
+ */
+export let jsdocHack;
+
+/**
  * @typedef {Object} StartTaskResponse
+ * @memberof task/types
  */
 export type StartTaskResponse = {
   /**
@@ -16,6 +26,7 @@ export type StartTaskResponse = {
 /**
  * Result of service stopTask operation.
  * @typedef {Object} StopTaskResult
+ * @memberof task/types
  */
 export enum StopTaskResult {
   OK,
@@ -24,6 +35,7 @@ export enum StopTaskResult {
 
 /**
  * @typedef {Object} StopTaskResponse
+ * @memberof task/types
  */
 export type StopTaskResponse = {
   /**
@@ -35,6 +47,7 @@ export type StopTaskResponse = {
 
 /**
  * @typedef {Object} TaskRecord
+ * @memberof task/types
  */
 export type TaskRecord = {
   /**
@@ -65,6 +78,7 @@ export type TaskRecord = {
 
 /**
  * @typedef {Object} GetCurrentTaskResult
+ * @memberof task/types
  */
 export type GetCurrentTaskResult = {
   /**
@@ -75,6 +89,7 @@ export type GetCurrentTaskResult = {
 
 /**
  * @typedef {Object} GetCurrentTaskResponse
+ * @memberof task/types
  */
 export type GetCurrentTaskResponse = {
   /**
@@ -91,6 +106,7 @@ export type GetCurrentTaskResponse = {
 
 /**
  * @typedef {Object} TaskDbEntry
+ * @memberof task/types
  */
 export type TaskDbEntry = {
   /**
@@ -101,6 +117,7 @@ export type TaskDbEntry = {
 
 /**
  * @typedef {Object} DbStopTaskStatus
+ * @memberof task/types
  */
 export enum DbStopTaskStatus {
   OK,

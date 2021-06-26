@@ -1,7 +1,13 @@
 import Sequelize from 'sequelize';
 
 /**
+ * This file implements PostgreSQL on Sequelize driver.
+ * @namespace database
+ */
+
+/**
  * Sequelize instance. Used to create ORM interfaces.
+ * @memberof database
  */
 export const sequelize = new Sequelize.Sequelize(
   process.env.DB_SCHEMA,
@@ -18,6 +24,7 @@ export const sequelize = new Sequelize.Sequelize(
  * Sends authenticate request to database server
  * to check if connection is alright.
  * @returns {null | Error}
+ * @memberof database
  */
 export async function testConnection() {
   try {

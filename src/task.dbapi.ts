@@ -45,7 +45,7 @@ function dbRecordToTaskRecord(record: Model<any, any>): T.TaskRecord {
 /**
  * Updates database entry related to current task,
  * and inserts new task to the database.
- * @returns {null | Error}
+ * @returns {void}
  * @memberof task/dbapi
  */
 export async function startTask(

@@ -1,10 +1,18 @@
 import Sequelize from 'sequelize';
 import { sequelize } from './database';
 
+/**
+ * This files contains ORM interface definitions
+ * for Task related structures.
+ * @namespace task/dbentry
+ */
+
 let taskValue = undefined;
 
 /**
- * Defines Task ORM interface.
+ * Returns Sequelize interface to tasks table.
+ * Creates the table if it does not exist.
+ * @memberof task/dbentry
  */
 export async function Task() {
   if (taskValue === undefined) {
