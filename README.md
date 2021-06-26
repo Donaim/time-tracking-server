@@ -14,8 +14,8 @@ followed by `npm install && make dev` (in another terminal).
 
 # Documentation
 
-To generate documentation run `npm install && npm run docs` 
-and then open `docs/index.html`.
+Code documentation is available online at [https://donaim.github.io/time-tracking-server/](github).
+To get it locally, run `npm install && npm run docs` and open `docs/index.html`.
 
 Server API reference is available at `localhost:3000/api` when server is run.
 It is generated with `Nest.js/swagger`, so it is human-readable.
