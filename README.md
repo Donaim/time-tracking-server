@@ -14,7 +14,7 @@ followed by `npm install && make dev` (in another terminal).
 
 # Documentation
 
-Code documentation is available online at [https://donaim.github.io/time-tracking-server/](github).
+Code documentation is available online at [github](https://donaim.github.io/time-tracking-server/).
 To get it locally, run `npm install && npm run docs` and open `docs/index.html`.
 
 Server API reference is available at `localhost:3000/api` when server is run.
