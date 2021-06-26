@@ -68,7 +68,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="AppController.html">AppController</a></li><li><a href="AppService.html">AppService</a></li><li><a href="task_dbapi.html">task/dbapi</a></li><li><a href="TaskController.html">TaskController</a></li><li><a href="TaskService.html">TaskService</a></li><li><a href="time.html">time</a></li></ul><h3>Global</h3><ul><li><a href="global.html#dynamicState">dynamicState</a></li><li><a href="global.html#getDynamic">getDynamic</a></li><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#setDynamic">setDynamic</a></li><li><a href="global.html#Task">Task</a></li><li><a href="global.html#testConnection">testConnection</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="AppController.html">AppController</a></li><li><a href="AppService.html">AppService</a></li><li><a href="database.html">database</a></li><li><a href="dynamicScope.html">dynamicScope</a></li><li><a href="task_dbapi.html">task/dbapi</a></li><li><a href="task_dbentry.html">task/dbentry</a></li><li><a href="task_types.html">task/types</a></li><li><a href="TaskController.html">TaskController</a></li><li><a href="TaskService.html">TaskService</a></li><li><a href="time.html">time</a></li></ul></div>
                 
             </nav>
         </div>
@@ -93,7 +93,7 @@
   HttpException,
 } from '@nestjs/common';
 import { TaskService } from './task.service';
-import { ApiOperation, ApiParam } from '@nestjs/swagger';
+import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import * as T from './task.types';
 
 /**
@@ -116,6 +116,11 @@ export class TaskController {
   @ApiOperation({
     summary: 'Stops current task, creates new one, and makes it current',
   })
+  @ApiResponse({
+    status: 200,
+    description:
+      'Task successfully started. Example response: { "statusCode": 200 }',
+  })
   async startTask(
     @Query('title') title: string,
     @Query('description') description: string | null = null,
@@ -133,6 +138,11 @@ export class TaskController {
 
   @Get('/stop_task')
   @ApiOperation({ summary: 'Stops current task' })
+  @ApiResponse({
+    status: 200,
+    description:
+      'Task successfully stoped. Example response: { "statusCode": 200 }',
+  })
   async stopTask(): Promise&lt;T.StopTaskResponse> {
     const result = await this.taskService.stopTask();
     switch (result) {
@@ -147,11 +157,11 @@ export class TaskController {
   }
 
   @Get('/get_current_task')
-  /* TODO: find a way to provide examples within Nest.js/swagger API */
-  @ApiOperation({
-    summary: 'Returns current task',
+  @ApiOperation({ summary: 'Returns current task' })
+  @ApiResponse({
+    status: 200,
     description:
-      'example response: { "statusCode": 200, "title": "A", "description": null, "startt": 12345, "endt": null }',
+      'All OK. Example response: { "statusCode": 200, "title": "A", "description": null, "startt": 12345, "endt": null }',
   })
   async getCurrentTask(): Promise&lt;T.GetCurrentTaskResponse> {
     const result = await this.taskService.getCurrentTask();

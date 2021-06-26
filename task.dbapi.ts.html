@@ -68,7 +68,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="AppController.html">AppController</a></li><li><a href="AppService.html">AppService</a></li><li><a href="task_dbapi.html">task/dbapi</a></li><li><a href="TaskController.html">TaskController</a></li><li><a href="TaskService.html">TaskService</a></li><li><a href="time.html">time</a></li></ul><h3>Global</h3><ul><li><a href="global.html#dynamicState">dynamicState</a></li><li><a href="global.html#getDynamic">getDynamic</a></li><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#setDynamic">setDynamic</a></li><li><a href="global.html#Task">Task</a></li><li><a href="global.html#testConnection">testConnection</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="AppController.html">AppController</a></li><li><a href="AppService.html">AppService</a></li><li><a href="database.html">database</a></li><li><a href="dynamicScope.html">dynamicScope</a></li><li><a href="task_dbapi.html">task/dbapi</a></li><li><a href="task_dbentry.html">task/dbentry</a></li><li><a href="task_types.html">task/types</a></li><li><a href="TaskController.html">TaskController</a></li><li><a href="TaskService.html">TaskService</a></li><li><a href="time.html">time</a></li></ul></div>
                 
             </nav>
         </div>
@@ -132,7 +132,7 @@ function dbRecordToTaskRecord(record: Model&lt;any, any>): T.TaskRecord {
 /**
  * Updates database entry related to current task,
  * and inserts new task to the database.
- * @returns {null | Error}
+ * @returns {void}
  * @memberof task/dbapi
  */
 export async function startTask(

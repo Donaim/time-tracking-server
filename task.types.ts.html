@@ -68,7 +68,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="AppController.html">AppController</a></li><li><a href="AppService.html">AppService</a></li><li><a href="task_dbapi.html">task/dbapi</a></li><li><a href="TaskController.html">TaskController</a></li><li><a href="TaskService.html">TaskService</a></li><li><a href="time.html">time</a></li></ul><h3>Global</h3><ul><li><a href="global.html#dynamicState">dynamicState</a></li><li><a href="global.html#getDynamic">getDynamic</a></li><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#setDynamic">setDynamic</a></li><li><a href="global.html#Task">Task</a></li><li><a href="global.html#testConnection">testConnection</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="AppController.html">AppController</a></li><li><a href="AppService.html">AppService</a></li><li><a href="database.html">database</a></li><li><a href="dynamicScope.html">dynamicScope</a></li><li><a href="task_dbapi.html">task/dbapi</a></li><li><a href="task_dbentry.html">task/dbentry</a></li><li><a href="task_types.html">task/types</a></li><li><a href="TaskController.html">TaskController</a></li><li><a href="TaskService.html">TaskService</a></li><li><a href="time.html">time</a></li></ul></div>
                 
             </nav>
         </div>
@@ -86,11 +86,21 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @file Contains type definitions related to task operations.
+ * This file contains type definitions related to task operations.
+ * @namespace task/types
  */
 
 /**
+ * This variable is here to make JSDoc
+ * work with a file that only contains type definitions.
+ * @memberof task/types
+ * @private
+ */
+export let jsdocHack;
+
+/**
  * @typedef {Object} StartTaskResponse
+ * @memberof task/types
  */
 export type StartTaskResponse = {
   /**
@@ -103,6 +113,7 @@ export type StartTaskResponse = {
 /**
  * Result of service stopTask operation.
  * @typedef {Object} StopTaskResult
+ * @memberof task/types
  */
 export enum StopTaskResult {
   OK,
@@ -111,6 +122,7 @@ export enum StopTaskResult {
 
 /**
  * @typedef {Object} StopTaskResponse
+ * @memberof task/types
  */
 export type StopTaskResponse = {
   /**
@@ -122,6 +134,7 @@ export type StopTaskResponse = {
 
 /**
  * @typedef {Object} TaskRecord
+ * @memberof task/types
  */
 export type TaskRecord = {
   /**
@@ -152,6 +165,7 @@ export type TaskRecord = {
 
 /**
  * @typedef {Object} GetCurrentTaskResult
+ * @memberof task/types
  */
 export type GetCurrentTaskResult = {
   /**
@@ -162,6 +176,7 @@ export type GetCurrentTaskResult = {
 
 /**
  * @typedef {Object} GetCurrentTaskResponse
+ * @memberof task/types
  */
 export type GetCurrentTaskResponse = {
   /**
@@ -178,6 +193,7 @@ export type GetCurrentTaskResponse = {
 
 /**
  * @typedef {Object} TaskDbEntry
+ * @memberof task/types
  */
 export type TaskDbEntry = {
   /**
@@ -188,6 +204,7 @@ export type TaskDbEntry = {
 
 /**
  * @typedef {Object} DbStopTaskStatus
+ * @memberof task/types
  */
 export enum DbStopTaskStatus {
   OK,

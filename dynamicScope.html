@@ -66,7 +66,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="dynamicScope.html">dynamicScope</a></li><li><a href="task_dbapi.html">task/dbapi</a></li><li><a href="time.html">time</a></li></ul><h3>Classes</h3><ul><li><a href="AppController.html">AppController</a></li><li><a href="AppService.html">AppService</a></li><li><a href="TaskController.html">TaskController</a></li><li><a href="TaskService.html">TaskService</a></li></ul><h3>Global</h3><ul><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#Task">Task</a></li><li><a href="global.html#testConnection">testConnection</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="AppController.html">AppController</a></li><li><a href="AppService.html">AppService</a></li><li><a href="database.html">database</a></li><li><a href="dynamicScope.html">dynamicScope</a></li><li><a href="task_dbapi.html">task/dbapi</a></li><li><a href="task_dbentry.html">task/dbentry</a></li><li><a href="task_types.html">task/types</a></li><li><a href="TaskController.html">TaskController</a></li><li><a href="TaskService.html">TaskService</a></li><li><a href="time.html">time</a></li></ul></div>
                 
             </nav>
         </div>
@@ -160,7 +160,425 @@ objects inside mocked objects</div>
     
 
     
+        <div class='vertical-section'>
+            <h1>Members</h1>
+            <div class="members">
+            
+                <div class="member">
 
+<h4 class="name" id=".dynamicState">
+    <a class="href-link" href="#.dynamicState">#</a>
+    
+        
+            <span class='tag'>static</span>
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        dynamicState
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Private state structure. Represents dynamic context.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="dynamicScope.ts.html" class="button">View Source</a>
+            <span>
+                <a href="dynamicScope.ts.html">dynamicScope.ts</a>, <a href="dynamicScope.ts.html#line11">line 11</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+        <div class='vertical-section'>
+            <h1>Methods</h1>
+            <div class="members">
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".getDynamic">
+        <a class="href-link" href="#.getDynamic">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                getDynamic<span class="signature">(name)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Get value for a key in current dynamic context.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>name</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">string</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">key.</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="dynamicScope.ts.html" class="button">View Source</a>
+            <span>
+                <a href="dynamicScope.ts.html">dynamicScope.ts</a>, <a href="dynamicScope.ts.html#line17">line 17</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".setDynamic">
+        <a class="href-link" href="#.setDynamic">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                setDynamic<span class="signature">(name, value)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Set value for a key in current dynamic context.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>name</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">string</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">key.</td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>value</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">any</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">value.</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="dynamicScope.ts.html" class="button">View Source</a>
+            <span>
+                <a href="dynamicScope.ts.html">dynamicScope.ts</a>, <a href="dynamicScope.ts.html#line26">line 26</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
     
 
     
