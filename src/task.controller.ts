@@ -13,6 +13,7 @@ import * as T from './task.types';
  * Task module controller.
  * Handles task-management requests.
  * Packs and unpacks HTTP messages for {@link TaskService}.
+ * @namespace
  */
 @Controller()
 export class TaskController {
