@@ -18,7 +18,7 @@ Code documentation is available online on [github](https://donaim.github.io/time
 To get it locally, run `npm install && npm run docs` and open `docs/index.html`.
 
 Server API documentation is available at [localhost:3000/api](http://localhost:3000/api) when the server is run,
-or over at server's [heroku instance](https://mysterious-plains-34555.herokuapp.com/api/) while it is online.
+or over at server's [heroku instance](https://still-reaches-36395.herokuapp.com/api/) while it is online.
 The API docs are generated with `Nest.js/swagger`, they are human-readable.
 
 # Tech stack
@@ -29,7 +29,7 @@ The API docs are generated with `Nest.js/swagger`, they are human-readable.
 - Testing is done using `jest`/`supertest`(`Chai` plugin), which are defaults for `Nest.js`.
 - For Continuous Integration, github actions are used.
 - CI makes use of [server's docker image](Dockerfile).
-- Server is deployed on [heroku](https://mysterious-plains-34555.herokuapp.com/ping).
+- Server is deployed on [heroku](https://still-reaches-36395.herokuapp.com/ping).
 - Docs are deployed on [github-pages](https://donaim.github.io/time-tracking-server/).
 
 # Possible improvements
